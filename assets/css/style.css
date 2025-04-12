@@ -21,7 +21,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 /* Navigation */
@@ -30,6 +30,39 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
     padding: 1rem 0;
     backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    animation: movePattern 20s linear infinite;
+}
+
+.navbar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.1) 100%);
+    opacity: 0.5;
+}
+
+.navbar .container {
+    position: relative;
+    z-index: 1;
 }
 
 .navbar-brand {
@@ -78,9 +111,23 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('assets/images/pattern.png') repeat;
-    opacity: 0.03;
-    z-index: 0;
+    background: 
+        linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    animation: movePattern 20s linear infinite;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.1) 100%);
+    opacity: 0.5;
 }
 
 .hero .container {
@@ -114,14 +161,130 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-2px);
 }
 
+/* Remove section divider styles */
+.section-divider {
+    display: none;
+}
+
+@keyframes movePattern {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 60px 60px;
+    }
+}
+
 /* CEO Section */
 .ceo {
-    padding: 100px 0;
+    padding: 60px 0;
     background: var(--gradient-secondary);
     position: relative;
 }
 
-.ceo::before {
+.ceo .container {
+    position: relative;
+    z-index: 1;
+}
+
+.ceo .row {
+    align-items: center;
+}
+
+.ceo .col-lg-6 {
+    padding: 0 1rem;
+}
+
+.ceo h2 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.ceo h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.ceo h3 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.ceo .lead {
+    color: var(--light-text);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.ceo p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.ceo-qualifications {
+    background: var(--white);
+    padding: 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.ceo-qualifications h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.ceo-qualifications ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 0;
+}
+
+.ceo-qualifications li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.ceo img {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    max-width: 65%;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+}
+
+.ceo img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Services Section */
+.services {
+    padding: 100px 0;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.services::before {
     content: '';
     position: absolute;
     top: 0;
@@ -133,103 +296,104 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 0;
 }
 
-.ceo .container {
-    position: relative;
-    z-index: 1;
-}
-
-.ceo h2 {
-    color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.ceo h3 {
-    color: var(--primary-color);
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.ceo .lead {
-    color: var(--light-text);
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-}
-
-.ceo p {
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-}
-
-.ceo-qualifications {
-    margin-top: 2rem;
-}
-
-.ceo-qualifications h4 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.ceo-qualifications ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.ceo-qualifications li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.ceo-qualifications li:before {
-    content: "•";
-    color: var(--primary-color);
-    position: absolute;
-    left: 0;
-}
-
-.ceo img {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.ceo img:hover {
-    transform: scale(1.02);
-}
-
-/* Services Section */
-.services {
-    padding: 100px 0;
-    background: var(--white);
-}
-
 .service-card {
     background: var(--white);
-    border-radius: 15px;
-    box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-15px) rotateX(5deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
 }
 
 .service-card img {
     width: 100%;
-    height: 250px;
+    height: 300px;
     object-fit: cover;
+    transition: transform 0.4s ease;
+    border-radius: 20px 20px 0 0;
+}
+
+.service-card:hover img {
+    transform: scale(1.05);
 }
 
 .service-card h3 {
-    padding: 1.5rem;
+    padding: 2rem 2rem 1rem;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--text-color);
+    position: relative;
+    z-index: 1;
+}
+
+.service-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2rem;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    transition: width 0.4s ease;
+}
+
+.service-card:hover h3::after {
+    width: 100px;
 }
 
 .service-card p {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 2rem 2rem;
     color: var(--light-text);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+}
+
+.service-card .content-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card .content-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card:hover .content-wrapper::after {
+    opacity: 1;
 }
 
 /* Contact Section */
@@ -338,8 +502,7 @@ h1, h2, h3, h4, h5, h6 {
 
     /* CEO Section */
     .ceo {
-        padding: 60px 0;
-        text-align: center;
+        padding: 40px 0;
     }
 
     .ceo h2 {
@@ -347,16 +510,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .ceo h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
-    .ceo img {
-        margin-bottom: 2rem;
-        max-width: 100%;
+    .ceo .lead {
+        font-size: 1rem;
     }
 
     .ceo-qualifications {
-        text-align: left;
+        padding: 1rem;
     }
 
     /* Services Section */
@@ -371,6 +533,20 @@ h1, h2, h3, h4, h5, h6 {
 
     .service-card {
         margin-bottom: 2rem;
+    }
+
+    .service-card img {
+        height: 250px;
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        padding: 1.5rem 1.5rem 0.75rem;
+    }
+
+    .service-card p {
+        padding: 0 1.5rem 1.5rem;
+        font-size: 1rem;
     }
 
     /* Contact Section */

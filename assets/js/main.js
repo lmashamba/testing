@@ -12,9 +12,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
-        navbar.classList.add('navbar-scrolled');
+        navbar.classList.add('scrolled');
     } else {
-        navbar.classList.remove('navbar-scrolled');
+        navbar.classList.remove('scrolled');
     }
 });
 
@@ -23,52 +23,57 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
         const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        // Here you would typically send the data to your server
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        alert('Thank you for your message! We will get back to you soon.');
-        
-        // Reset form
+        console.log('Form submitted:', Object.fromEntries(formData));
+        alert('Thank you for your message. We will get back to you soon!');
         this.reset();
     });
 }
 
-// Animation on scroll
-const animateOnScroll = function() {
-    const elements = document.querySelectorAll('.service-card, .feature');
-    
-    elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (elementPosition < windowHeight - 100) {
-            element.classList.add('animate-fade-in');
-        }
-    });
+// Animation on scroll for service cards and testimonials
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
-window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', animateOnScroll);
-
-// Mobile menu toggle
-const navbarToggler = document.querySelector('.navbar-toggler');
-const navbarCollapse = document.querySelector('.navbar-collapse');
-
-if (navbarToggler && navbarCollapse) {
-    navbarToggler.addEventListener('click', function() {
-        navbarCollapse.classList.toggle('show');
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
-            navbarCollapse.classList.remove('show');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
         }
     });
-} 
+}, observerOptions);
+
+// Observe service cards
+document.querySelectorAll('.service-card').forEach(card => {
+    observer.observe(card);
+});
+
+// Observe testimonial cards
+document.querySelectorAll('.testimonial-card').forEach(card => {
+    observer.observe(card);
+});
+
+// Observe CEO image
+const ceoImage = document.querySelector('.ceo img');
+if (ceoImage) {
+    observer.observe(ceoImage);
+}
+
+// Mobile menu toggle
+const mobileMenuBtn = document.querySelector('.navbar-toggler');
+const mobileMenu = document.querySelector('.navbar-collapse');
+
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('show');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            mobileMenu.classList.remove('show');
+        }
+    });
+}
